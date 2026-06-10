@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 license = "GPL-3.0-or-later"
 description = "A CLI for flatpak with machine readable output, to be used instead of libflatpak for languages that don't have a libflatpak binding."
+website = "https://github.com/hamza-algohary/libflatpakcli"
 
 [dependencies]
 clap = { version = "4.6.1" , features = ["derive"] }

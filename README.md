@@ -15,3 +15,8 @@ Commands:
     remotes         <user/system>                         -> List<FlatpakRemote>
     info            <user/system> <remote> <reference>    -> MyFlatpakRemoteRefInfo
 ```
+
+You may install it through cargo by running the following command:
+```bash
+cargo install libflatpakcli
+```
