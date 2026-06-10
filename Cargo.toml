@@ -1,6 +1,6 @@
 [package]
 name = "libflatpakcli"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 license = "GPL-3.0-or-later"
 description = "A CLI for flatpak with machine readable output, to be used instead of libflatpak for languages that don't have a libflatpak binding."
