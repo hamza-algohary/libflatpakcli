@@ -21,41 +21,21 @@ fn installed_refs_names(refs : Vec<InstalledRef>) -> Vec<String> {
     ).collect()
 }
 
-// trait InstalledRefExt {
-//     fn reference_string(&self) -> String;
-//     fn kind_string(&self) -> String;
-//     fn name_string(&self) -> String;
-//     fn arch_string(&self) -> String;
-//     fn branch_string(&self) -> String;
-// }
-
-
-// impl InstalledRefExt for InstalledRef {
-//     // app/ai.jan.Jan/x86_64/stable
-//     fn reference_string(&self) -> String {
-//         self.kind_string() + "/" + &self.name_string() + "/" + &self.arch_string() + "/" + &self.branch_string()
-//     }
-    
-//     fn kind_string(&self) -> String {
-//         match self.kind() {
-//             libflatpak::RefKind::App => "app".to_string(),
-//             libflatpak::RefKind::Runtime => "runtime".to_string(),
-//             _ => "unknown".to_string(),
-//         }
-//     }
-    
-//     fn name_string(&self) -> String {
-//         self.name().unwrap_or_default().to_string()
-//     }
-
-//     fn arch_string(&self) -> String {
-//         self.arch().unwrap_or_default().to_string()        
-//     }
-
-//     fn branch_string(&self) -> String {
-//         self.branch().unwrap_or_default().to_string()
-//     }
-// }
+static HELP_MESSAGE : &str = 
+"
+Commands:
+    install         <user/system> <remote> <reference>    -> List<MyFlatpakTransactionOperation> followed by NULL, followed by progress percentage of each operation delimited by NULL.
+    remove          <user/system> <reference>             -> List<MyFlatpakTransactionOperation> followed by NULL, followed by progress percentage of each operation delimited by NULL.
+    upgrade         <user/system> <reference>             -> List<MyFlatpakTransactionOperation> followed by NULL, followed by progress percentage of each operation delimited by NULL.
+    update-cache    <user/system> <remote>
+    list-installed  <user/system>                         -> List<reference : String>
+    list-upgradable <user/system>                         -> List<reference : String>
+    appstream-path  <user/system> <remote>                -> path : String
+    add-remote      <user/system> <name> <url>               !!UNTESTED!!
+    remove-remote   <user/system> <name>                     !!UNTESTED!!
+    remotes         <user/system>                         -> List<FlatpakRemote>
+    info            <user/system> <remote> <reference>    -> MyFlatpakRemoteRefInfo
+";
 
 trait MyTransactionExt {
     fn report_operations(&self);
@@ -206,6 +186,9 @@ fn main() {
             };
             println!("{}",serde_json::to_string(&info).expect("Couldn't serialized info : MyFlatpakRemoteRefInfo"));
         },
+        Command::EndPoints => {
+            println!("{}",HELP_MESSAGE);
+        },
     }
 }
 
@@ -297,7 +280,8 @@ enum Command {
         installation: Installation,
         remote : String,
         reference: String,
-    }
+    },
+    EndPoints,
 }
 
 #[derive(Debug, Clone, Copy, ValueEnum)]
